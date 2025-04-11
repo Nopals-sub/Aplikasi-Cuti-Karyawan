@@ -1,18 +1,10 @@
 <?php
-//fungsi format rupiah 
-/**function format_rupiah($rp) {
-	$hasil = "Rp." . number_format($rp, 0, "", ".") . ",00";
-	return $hasil;
-    }
-    **/
-$db_host = "localhost";
-$db_user = "root";
-$db_pass = "";
-$db_name = "hrd";
-
-$koneksi = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-
-if(mysqli_connect_errno()){
-	echo 'Gagal melakukan koneksi ke Database : '.mysqli_connect_error();
-}   
+$host = 'db';           // Nama layanan database di docker-compose.yml
+$user = 'hrd';         // Username dari docker-compose.yml
+$pass = 'hrd';     // Password dari docker-compose.yml
+$db = 'hrd';            // Nama database dari docker-compose.yml
+$koneksi = mysqli_connect($host, $user, $pass, $db);
+if (!$koneksi) {
+    die('Koneksi gagal: ' . mysqli_connect_error());
+}
 ?>

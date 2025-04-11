@@ -1,7 +1,7 @@
 <?php
-/* Database connection start */
+/* Database koneksiection start */
 include "koneksi.php";
-/* Database connection end */
+/* Database koneksiection end */
 
 
 // storing  request (ie, get/post) global array to a variable  
@@ -23,7 +23,7 @@ $columns = array(
 // getting total number records without any search
 $sql = "SELECT kode, nik, tanggal_awal, tanggal_akhir, jumlah, jenis_cuti, ket, status";
 $sql.=" FROM cuti";
-$query=mysqli_query($conn, $sql) or die("ajaxin-data-cuti.php: get Cuti");
+$query=mysqli_query($koneksi, $sql) or die("ajaxin-data-cuti.php: get Cuti");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
@@ -40,18 +40,18 @@ if( !empty($requestData['search']['value']) ) {
 	$sql.=" OR jenis_cuti LIKE '".$requestData['search']['value']."%' ";
     $sql.=" OR ket LIKE '".$requestData['search']['value']."%' ";
     $sql.=" OR status LIKE '".$requestData['search']['value']."%' ";
-	$query=mysqli_query($conn, $sql) or die("ajax-data-cuti.php: get Cuti");
+	$query=mysqli_query($koneksi, $sql) or die("ajax-data-cuti.php: get Cuti");
 	$totalFiltered = mysqli_num_rows($query); // when there is a search parameter then we have to modify total number filtered rows as per search result without limit in the query 
 
 	$sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   "; // $requestData['order'][0]['column'] contains colmun index, $requestData['order'][0]['dir'] contains order such as asc/desc , $requestData['start'] contains start row number ,$requestData['length'] contains limit length.
-	$query=mysqli_query($conn, $sql) or die("ajax-data-cuti.php: get Cuti"); // again run query with limit
+	$query=mysqli_query($koneksi, $sql) or die("ajax-data-cuti.php: get Cuti"); // again run query with limit
 	
 } else {	
 
 	$sql = "SELECT kode, nik, tanggal_awal, tanggal_akhir, jumlah, jenis_cuti, ket, status";
 	$sql.=" FROM cuti";
 	$sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
-	$query=mysqli_query($conn, $sql) or die("ajaxin-grid-data.php: get Karyawan");   
+	$query=mysqli_query($koneksi, $sql) or die("ajaxin-grid-data.php: get Karyawan");   
 	
 }
 

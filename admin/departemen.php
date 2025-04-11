@@ -102,10 +102,19 @@ include "session.php";
                     <tbody>
                     <tr>
                     <td><center><?php echo $no; ?></center></td>
-                    <td><center><?php echo $data['id_dept'];?></center></td>
-                    <td><center><?php echo $data['nama_dept'];?></center></td>
-                    <td><center><div id="thanks"><a class="btn btn-sm btn-primary" data-placement="bottom" data-toggle="tooltip" title="Edit Departemen" href="edit-departemen.php?aksi=edit&kd=<?php echo $data['id_dept'];?>"><span class="glyphicon glyphicon-edit"></span></a>  
-                        <a onclick="return confirm ('Yakin hapus <?php echo $data['nama_dept'];?>.?');" class="btn btn-sm btn-danger tooltips" data-placement="bottom" data-toggle="tooltip" title="Hapus Departemen" href="departemen.php?aksi=hapus&kd=<?php echo $data['id_dept'];?>"><span class="glyphicon glyphicon-trash"></a></center></td></tr></div>
+                    <td><center><?php echo htmlspecialchars($data['id_dept']);?></center></td>
+                    <td><center><?php echo htmlspecialchars($data['nama_dept']);?></center></td>
+                    <td><center>
+                        <div id="thanks">
+                            <a class="btn btn-sm btn-primary" data-placement="bottom" data-toggle="tooltip" title="Edit Departemen" href="edit-departemen.php?aksi=edit&kd=<?php echo urlencode($data['id_dept']); ?>">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>  
+                            <a onclick="return confirm('Yakin hapus <?php echo htmlspecialchars($data['nama_dept']); ?>.?');" class="btn btn-sm btn-danger tooltips" data-placement="bottom" data-toggle="tooltip" title="Hapus Departemen" href="departemen.php?aksi=hapus&kd=<?php echo urlencode($data['id_dept']); ?>">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </div>
+                    </center></td>
+                    </tr></div>
                  <?php   
               } 
               ?>

@@ -166,9 +166,10 @@
                     { //$no++; ?>
                     <tbody>
                     <tr>
-                    <td><center><?php echo $data['nik'];?></center></td>
-                    <td><center><?php echo $data['nama'];?></center></td>
-                    <td><center><?php echo $data['jumlah_cuti'];?> Hari</center></td>
+                    <td><center><?php echo htmlspecialchars($data['nik'], ENT_QUOTES, 'UTF-8'); ?></center></td>
+                    <td><center><?php echo htmlspecialchars($data['nama'], ENT_QUOTES, 'UTF-8'); ?></center></td>
+                    <td><center><?php echo htmlspecialchars($data['jumlah_cuti'], ENT_QUOTES, 'UTF-8'); ?> Hari</center></td>
+                      
                     </tr></div>
                  <?php   
               } 
@@ -234,10 +235,10 @@
                     { //$no++; ?>
                     <tbody>
                     <tr>
-                    <td><center><?php echo $data['nik'];?></center></td>
-                    <td><center><?php echo $data['nama'];?></center></td>
-                    <td><center><?php echo $data['jumlah_cuti'];?> </center></td>
-                    <td><center><?php echo $data['ket'];?> </center></td>
+                    <td><center><?php echo htmlspecialchars($data['nik'], ENT_QUOTES, 'UTF-8');?></center></td>
+                    <td><center><?php echo htmlspecialchars($data['nama'], ENT_QUOTES, 'UTF-8');?></center></td>
+                    <td><center><?php echo htmlspecialchars($data['jumlah_cuti'], ENT_QUOTES, 'UTF-8');?> </center></td>
+                    <td><center><?php echo htmlspecialchars($data['ket'], ENT_QUOTES, 'UTF-8');?> </center></td>
                     </tr></div>
                  <?php   
               } 

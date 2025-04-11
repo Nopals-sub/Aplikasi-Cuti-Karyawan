@@ -73,7 +73,7 @@
           if (move_uploaded_file($_FILES['nama_file']['tmp_name'], $gambar)) {
             $sql="INSERT INTO karyawan (nik,nama,tanggal_masuk,departemen,jabatan,status,jumlah_cuti,username,password,level,gambar) VALUES
                   ('$nik','$nama','$tanggal_masuk','$departemen','$jabatan','$status','$jumlah_cuti','$username','$password','$level','$gambar')";
-            $res=mysqli_query($koneksi, $sql) or die (mysqli_error());
+            $res=mysqli_query($koneksi, $sql) or die (mysqli_error($koneksi));
             //echo "Gambar berhasil dikirim ke direktori".$gambar;
                   echo "<script>alert('Data berhasil dimasukan!'); window.location = 'karyawan.php'</script>";	   
           } else {

@@ -1,4 +1,6 @@
 <?php include "session.php"; ?>
+<!-- add baru -->
+<?php include "koneksi.php"; ?> 
 <!DOCTYPE html>
 <html>
  <?php include "head.php" ?>
@@ -64,7 +66,7 @@
            <input type='submit' value='Cari Data' class="btn btn-sm btn-primary" /> <a href='admin.php' class="btn btn-sm btn-success" >Refresh</i></a>
           	</div>
             </form>-->
-            <a href="karyawan_importxls.php" class="btn btn-sm btn-warning"><i class="fa fa-file"></i> Import Excel</a> <a href="karyawan_exportxls.php" class="btn btn-sm btn-success"><i class="fa fa-file"></i> Export Excel</a><br /><br />
+            <a href="karyawan_exportxls.php" class="btn btn-sm btn-success"><i class="fa fa-file"></i> Export Excel</a><br /><br />
                    <table id="lookup" class="table table-bordered table-hover">  
 	<thead bgcolor="eeeeee" align="center">
       <tr>

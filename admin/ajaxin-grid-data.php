@@ -21,7 +21,7 @@ $columns = array(
 // getting total number records without any search
 $sql = "SELECT kd_produk, nama_produk, qty, unit, harga_beli, harga_jual";
 $sql.=" FROM produk";
-$query=mysqli_query($conn, $sql) or die("ajaxin-grid-data.php: get Produk");
+$query=mysqli_query($koneksi, $sql) or die("ajaxin-grid-data.php: get Produk");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
@@ -36,18 +36,18 @@ if( !empty($requestData['search']['value']) ) {
     $sql.=" OR unit LIKE '".$requestData['search']['value']."%' ";
     $sql.=" OR harga_beli LIKE '".$requestData['search']['value']."%' ";
     $sql.=" OR harga_jual LIKE '".$requestData['search']['value']."%' ";
-	$query=mysqli_query($conn, $sql) or die("ajax-grid-data.php: get Produk");
+	$query=mysqli_query($koneksi, $sql) or die("ajax-grid-data.php: get Produk");
 	$totalFiltered = mysqli_num_rows($query); // when there is a search parameter then we have to modify total number filtered rows as per search result without limit in the query 
 
 	$sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   "; // $requestData['order'][0]['column'] contains colmun index, $requestData['order'][0]['dir'] contains order such as asc/desc , $requestData['start'] contains start row number ,$requestData['length'] contains limit length.
-	$query=mysqli_query($conn, $sql) or die("ajaxin-grid-data.php: get Produk"); // again run query with limit
+	$query=mysqli_query($koneksi, $sql) or die("ajaxin-grid-data.php: get Produk"); // again run query with limit
 	
 } else {	
 
 	$sql = "SELECT kd_produk, nama_produk, qty, unit, harga_beli, harga_jual";
 	$sql.=" FROM produk";
 	$sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
-	$query=mysqli_query($conn, $sql) or die("ajaxin-grid-data.php: get Produk");   
+	$query=mysqli_query($koneksi, $sql) or die("ajaxin-grid-data.php: get Produk");   
 	
 }
 

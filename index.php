@@ -32,11 +32,13 @@
       </div><!-- /.login-logo -->
       <div class="login-box-body">
       <center><img src="dist/img/niqoweb.png" /></center>
-         <p class="login-box-msg"><?php if (isset($_GET['error'])) {echo 
-                  "<div class='alert alert-danger alert-gradient alert-dismissible fade in' role='alert'>
-                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>x</span></button>
-                            <strong>Error!</strong> $_GET[error]
-                          </div>";} else { echo "";} ?></p>
+         <p class="login-box-msg"><?php if (isset($_GET['error'])) {
+    $error = htmlspecialchars($_GET['error'], ENT_QUOTES, 'UTF-8');
+    echo "<div class='alert alert-danger alert-gradient alert-dismissible fade in' role='alert'>
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button>
+            <strong>Error!</strong> $error
+          </div>";
+} ?></p>
         <form action="proseslogin.php" id="login" name="login" method="post">
           <div class="form-group has-feedback">
             <input type="text" id="username" name="username" class="form-control" autocomplete="off" placeholder="Username" required="required">

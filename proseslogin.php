@@ -19,10 +19,14 @@ if (empty($username) && empty($password)) {
 	header('location:index.php?error=Password Kosong!');
 }
 
-$q = mysqli_query($koneksi, "select * from karyawan where username='$username' and password='$password'");
-$row = mysqli_fetch_array ($q);
+$stmt = mysqli_prepare($koneksi, "SELECT * FROM karyawan WHERE username=? AND password=?");
+mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
-if (mysqli_num_rows($q) == 1) {
+$row = mysqli_fetch_array ($result);
+
+if (mysqli_num_rows($result) == 1) {
     $_SESSION['nik']        = $row['nik'];
     $_SESSION['username']   = $username;
     $_SESSION['nama']       = $row['nama'];

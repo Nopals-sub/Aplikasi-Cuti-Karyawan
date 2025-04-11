@@ -103,9 +103,10 @@ include "session.php";
                     <tbody>
                     <tr>
                     <td><center><?php echo $no; ?></center></td>
-                    <td><center><?php echo $data['id_jabatan'];?></center></td>
-                    <td><center><?php echo $data['jabatan'];?></center></td>
-                    <td><center><?php echo $data['tunjangan'];?></center></td>
+                    <td><center><?php echo htmlspecialchars($data['id_jabatan'], ENT_QUOTES, 'UTF-8'); ?></center></td>
+                    <td><center><?php echo htmlspecialchars($data['jabatan'], ENT_QUOTES, 'UTF-8'); ?></center></td>
+                    <td><center><?php echo htmlspecialchars($data['tunjangan'], ENT_QUOTES, 'UTF-8'); ?></center></td>
+
                     <td><center><div id="thanks"><a class="btn btn-sm btn-primary" data-placement="bottom" data-toggle="tooltip" title="Edit Jabatan" href="edit-jabatan.php?aksi=edit&kd=<?php echo $data['id_jabatan'];?>"><span class="glyphicon glyphicon-edit"></span></a>  
                         <a onclick="return confirm ('Yakin hapus <?php echo $data['jabatan'];?>.?');" class="btn btn-sm btn-danger tooltips" data-placement="bottom" data-toggle="tooltip" title="Hapus Jabatan" href="jabatan.php?aksi=hapus&kd=<?php echo $data['id_jabatan'];?>"><span class="glyphicon glyphicon-trash"></a></center></td></tr></div>
                  <?php   

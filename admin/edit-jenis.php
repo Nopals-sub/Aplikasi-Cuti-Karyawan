@@ -50,12 +50,17 @@
                 </div><!-- /.box-header -->
                  <?php
             $kd = $_GET['kd'];
-			$sql = mysqli_query($koneksi, "SELECT * FROM jenis_cuti WHERE id_cuti='$kd'");
-			if(mysqli_num_rows($sql) == 0){
-				header("Location: jenis.php");
-			}else{
-				$row = mysqli_fetch_assoc($sql);
-			}
+            $stmt = $koneksi->prepare("SELECT * FROM jenis_cuti WHERE id_cuti = ?");
+            $stmt->bind_param("s", $kd);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows == 0) {
+                header("Location: jenis.php");
+            } else {
+                $row = $result->fetch_assoc();
+            }
+            
 			if(isset($_POST['update'])){
 				$id_jabatan  = $_POST['id_cuti'];
                 $jabatan     = $_POST['nama_cuti'];

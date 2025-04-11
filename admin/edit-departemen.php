@@ -50,23 +50,35 @@
                 </div><!-- /.box-header -->
                  <?php
             $kd = $_GET['kd'];
-			$sql = mysqli_query($koneksi, "SELECT * FROM departemen WHERE id_dept='$kd'");
-			if(mysqli_num_rows($sql) == 0){
-				header("Location: departemen.php");
-			}else{
-				$row = mysqli_fetch_assoc($sql);
-			}
-			if(isset($_POST['update'])){
-				$id_dept   = $_POST['id_dept'];
-				$nama_dept = $_POST['nama_dept'];
-				
-				$update = mysqli_query($koneksi, "UPDATE departemen SET nama_dept='$nama_dept' WHERE id_dept='$kd'") or die(mysqli_error());
-				if($update){
-					echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data berhasil disimpan.</div>';
-				}else{
-					echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data gagal disimpan, silahkan coba lagi.</div>';
-				}
-			}
+            $stmt = $koneksi->prepare("SELECT * FROM departemen WHERE id_dept = ?");
+            $stmt->bind_param("s", $kd);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows == 0) {
+                header("Location: departemen.php");
+            } else {
+                $row = $result->fetch_assoc();
+            }
+            
+            if (isset($_POST['update'])) {
+              $id_dept   = $_POST['id_dept'];
+              $nama_dept = $_POST['nama_dept'];
+          
+              $stmt = $koneksi->prepare("UPDATE departemen SET nama_dept = ? WHERE id_dept = ?");
+              $stmt->bind_param("ss", $nama_dept, $id_dept);
+          
+              if ($stmt->execute()) {
+                  echo '<div class="alert alert-info alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  Data berhasil disimpan.</div>';
+              } else {
+                  echo '<div class="alert alert-danger alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  Data gagal disimpan, silahkan coba lagi.</div>';
+              }
+          }
+          
 			
 			//if(isset($_GET['pesan']) == 'sukses'){
 			//	echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data berhasil disimpan.</div>';

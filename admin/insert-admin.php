@@ -22,7 +22,7 @@ if (!empty($_FILES["nama_file"]["tmp_name"]))
 		if (move_uploaded_file($_FILES['nama_file']['tmp_name'], $gambar)) {
 			$sql="INSERT INTO user (user_id,username,password,fullname,no_hp,level,gambar) VALUES
             ('$user_id','$username','$password','$fullname','$no_hp','$level','$gambar')";
-			$res=mysqli_query($koneksi, $sql) or die (mysqli_error());
+			$res=mysqli_query($koneksi, $sql) or die (mysqli_error($koneksi));
 			//echo "Gambar berhasil dikirim ke direktori".$gambar;
             echo "<script>alert('Data berhasil dimasukan!'); window.location = 'admin.php'</script>";	   
 		} else {

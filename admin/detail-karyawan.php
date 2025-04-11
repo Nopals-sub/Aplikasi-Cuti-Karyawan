@@ -41,8 +41,12 @@
                   </div> 
                 </div><!-- /.box-header -->
                 <?php
-            $query = mysqli_query($koneksi, "SELECT * FROM karyawan WHERE nik='$_GET[id]'");
-            $data  = mysqli_fetch_array($query);
+            $stmt = $koneksi->prepare("SELECT * FROM karyawan WHERE nik=?");
+            $stmt->bind_param("s", $_GET['id']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = $result->fetch_array();
+            
             ?>
                 <div class="box-body">
                   <div class="form-panel">

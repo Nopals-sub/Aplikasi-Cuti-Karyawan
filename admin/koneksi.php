@@ -1,11 +1,10 @@
 <?php
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "hrd";
-
-$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
-
-
+$host = 'db';           // Nama layanan database di docker-compose.yml
+$user = 'hrd';         // Username dari docker-compose.yml
+$pass = 'hrd';     // Password dari docker-compose.yml
+$db = 'hrd';            // Nama database dari docker-compose.yml
+$koneksi = mysqli_connect($host, $user, $pass, $db);
+if (!$koneksi) {
+    die('Koneksi gagal: ' . mysqli_connect_error());
+}
 ?>

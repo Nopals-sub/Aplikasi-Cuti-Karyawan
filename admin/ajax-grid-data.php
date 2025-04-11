@@ -22,7 +22,7 @@ $columns = array(
 // getting total number records without any search
 $sql = "SELECT nik, nama, tanggal_masuk, departemen, jabatan, status, jumlah_cuti";
 $sql.=" FROM karyawan";
-$query=mysqli_query($conn, $sql) or die("ajaxin-grid-data.php: get Karyawan");
+$query=mysqli_query($koneksi, $sql) or die("ajaxin-grid-data.php: get Karyawan");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
@@ -38,18 +38,18 @@ if( !empty($requestData['search']['value']) ) {
 	$sql.=" OR jabatan LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" OR status LIKE '".$requestData['search']['value']."%' ";
     $sql.=" OR jumlah_cuti LIKE '".$requestData['search']['value']."%' ";
-	$query=mysqli_query($conn, $sql) or die("ajax-grid-data.php: get Karyawan");
+	$query=mysqli_query($koneksi, $sql) or die("ajax-grid-data.php: get Karyawan");
 	$totalFiltered = mysqli_num_rows($query); // when there is a search parameter then we have to modify total number filtered rows as per search result without limit in the query 
 
 	$sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   "; // $requestData['order'][0]['column'] contains colmun index, $requestData['order'][0]['dir'] contains order such as asc/desc , $requestData['start'] contains start row number ,$requestData['length'] contains limit length.
-	$query=mysqli_query($conn, $sql) or die("ajaxin-grid-data.php: get Karyawan"); // again run query with limit
+	$query=mysqli_query($koneksi, $sql) or die("ajaxin-grid-data.php: get Karyawan"); // again run query with limit
 	
 } else {	
 
 	$sql = "SELECT nik, nama, tanggal_masuk, departemen, jabatan, status, jumlah_cuti";
 	$sql.=" FROM karyawan";
 	$sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
-	$query=mysqli_query($conn, $sql) or die("ajaxin-grid-data.php: get Karyawan");   
+	$query=mysqli_query($koneksi, $sql) or die("ajaxin-grid-data.php: get Karyawan");   
 	
 }
 
@@ -57,13 +57,13 @@ $data = array();
 while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	$nestedData=array(); 
 
-	$nestedData[] = $row["nik"];
-    $nestedData[] = $row["nama"];
-	$nestedData[] = $row["tanggal_masuk"];
-	$nestedData[] = $row["departemen"];
-	$nestedData[] = $row["jabatan"];
-	$nestedData[] = $row["status"];
-	$nestedData[] = $row["jumlah_cuti"];
+	$nestedData[] = htmlspecialchars($row["nik"], ENT_QUOTES, 'UTF-8');	
+    $nestedData[] = htmlspecialchars($row["nama"], ENT_QUOTES, 'UTF-8');
+	$nestedData[] = htmlspecialchars($row["tanggal_masuk"], ENT_QUOTES, 'UTF-8');
+	$nestedData[] = htmlspecialchars($row["departemen"], ENT_QUOTES, 'UTF-8')	;
+	$nestedData[] = htmlspecialchars($row["jabatan"], ENT_QUOTES, 'UTF-8');
+	$nestedData[] = htmlspecialchars($row["status"], ENT_QUOTES, 'UTF-8');
+	$nestedData[] = htmlspecialchars($row["jumlah_cuti"], ENT_QUOTES, 'UTF-8');
     $nestedData[] = '<td><center>
                      <a href="detail-karyawan.php?id='.$row['nik'].'"  data-toggle="tooltip" title="View Detail" class="btn btn-sm btn-success"> <i class="glyphicon glyphicon-search"></i> </a>
                      <a href="edit-karyawan.php?id='.$row['nik'].'"  data-toggle="tooltip" title="Edit" class="btn btn-sm btn-primary"> <i class="glyphicon glyphicon-edit"></i> </a>

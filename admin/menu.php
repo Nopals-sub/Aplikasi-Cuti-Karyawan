@@ -27,7 +27,7 @@
               <ul class="treeview-menu">
                 <li><a href="karyawan.php"><i class="fa fa-circle-o"></i> Karyawan</a></li>
                 <li><a href="input-karyawan.php"><i class="fa fa-circle-o"></i> Input Karyawan</a></li>
-                <li><a href="karyawan_importxls.php"><i class="fa fa-circle-o"></i> Import Data Excel</a></li>
+                <!-- <li><a href="karyawan_importxls.php"><i class="fa fa-circle-o"></i> Import Data Excel</a></li> -->
               </ul>
             </li>
             

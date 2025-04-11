@@ -50,12 +50,17 @@
                 </div><!-- /.box-header -->
                  <?php
             $kd = $_GET['id'];
-			$sql = mysqli_query($koneksi, "SELECT * FROM karyawan WHERE nik='$kd'");
-			if(mysqli_num_rows($sql) == 0){
-				header("Location: karyawan.php");
-			}else{
-				$row = mysqli_fetch_assoc($sql);
-			}
+            $stmt = $koneksi->prepare("SELECT * FROM karyawan WHERE nik=?");
+            $stmt->bind_param("s", $kd);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows == 0) {
+                header("Location: karyawan.php");
+            } else {
+                $row = $result->fetch_assoc();
+            }
+            
 			if(isset($_POST['update'])){
 
         $namafolder="gambar_admin/"; //tempat menyimpan file

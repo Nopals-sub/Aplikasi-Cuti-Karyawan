@@ -49,13 +49,18 @@
                   </div> 
                 </div><!-- /.box-header -->
                  <?php
-            $kd = $_GET['kd'];
-			$sql = mysqli_query($koneksi, "SELECT * FROM jabatan WHERE id_jabatan='$kd'");
-			if(mysqli_num_rows($sql) == 0){
-				header("Location: jabatan.php");
-			}else{
-				$row = mysqli_fetch_assoc($sql);
-			}
+           $kd = $_GET['kd'];
+           $stmt = $koneksi->prepare("SELECT * FROM jabatan WHERE id_jabatan = ?");
+           $stmt->bind_param("s", $kd);
+           $stmt->execute();
+           $result = $stmt->get_result();
+           
+           if ($result->num_rows == 0) {
+               header("Location: jabatan.php");
+           } else {
+               $row = $result->fetch_assoc();
+           }
+           
 			if(isset($_POST['update'])){
 				$id_jabatan  = $_POST['id_jabatan'];
                 $jabatan     = $_POST['jabatan'];
